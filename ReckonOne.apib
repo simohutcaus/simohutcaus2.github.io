@@ -1,0 +1,2295 @@
+FORMAT: 1A
+
+# Reckon One
+
+Reckon One is a cloud accounting system for small business with the ability to add and remove modules as the business needs change.
+
+# Group CashBooks
+
+Resources related to CashBooks in the Reckon One API.
+
+## CashBooks collection [/cashbooks]
+
+### List all CashBooks [GET]
+
+This action is used to retrieve all CashBooks the user has access to.
+
++ BookID (GUID) - The unique GUID of the book
++ BookName (String) - The name of the book
++ BookStatus - The status of the book (0 -Active, 1- Inactive, 3 - Deactivated)
++ Country - The home country of the book (AU - Australia, NZ - New Zealand, UK - United Kingdom)
+
++ Response 200 (application/json)
+
+{  
+   "BookId":"c1b3da90-e9df-4d57-8cfb-71a1d7bfe401",
+   "BookName":"DummyCashbook0",
+   "Bookstatus":3,
+   "Country":"NZ"
+} 
+
+#Group Tax Groups
+
+
+Resources related to Tax Groups in the Reckon One API.
+
+## Tax Groups Collection [/taxgroups]
+
+### List all Tax Groups [GET]
+
+This action is used to retrieve all the Tax Groups in the Reckon One book.
+
++ ID (GUID) - The unique GUID of the tax group
++ Name (String) - The name of the tax group
++ Rate (Number) - The rate of the tax group
++ IsActive (Boolean) - Whether the tax group is active in the book or not
++ Description (String) - The description of the tax group
++ UseCodeOnPurchases (Boolean) - Whether the tax group can be used on purchases
++ UseCodeOnSales (Boolean) - Whether the tax code can be used on sales
+
+
++ Response 200 (application/json)
+
+{  
+   "ID":"1d0b53f4-9329-4ffc-b337-e7fa01912b8f",
+   "Name":"CDG",
+   "Rate":11.89768,
+   "IsActive":true,
+   "Description":"Cellar Door GST",
+   "TaxCodes":[  
+      {  
+         "UseCodeOnPurchases":false,
+         "UseCodeOnSales":true
+      }
+   ],
+   "UseOnPurchases":false,
+   "UseOnSales":true
+}
+
+### List all Tax Groups [GET]
+
++ Response 200 (application/json)
+
+{  
+   "ID":"1d0b53f4-9329-4ffc-b337-e7fa01912b8f",
+   "Name":"CDG",
+   "Rate":11.89768,
+   "IsActive":true,
+   "Description":"Cellar Door GST",
+   "TaxCodes":[  
+      {  
+         "UseCodeOnPurchases":false,
+         "UseCodeOnSales":true
+      }
+   ],
+   "UseOnPurchases":false,
+   "UseOnSales":true
+}
+
+
+#Group Templates
+
+Resources related to Templates in the Reckon One API.
+
+## Templates Collection [/templates]
+
+- TemplateID (GUID) - The GUID of the template
+- TemplateName (String) - The name of the template
+- TemplateNameDisplay (String) - N/A
+- Description (String) - The description of the template
+- LogoName (String) - The logo being used on the template
+- Options (Number) - The options the customer has selected in the Reckon One book for the template. Not needed for API
+- Type (String) - The type of the template (1- Invoice, 2- Bill)
+
+### List all Templates [GET]
+
++ Response 200 (application/json)
+
+[  
+   {  
+      "TemplateId":"b0951418-5bce-4e1a-924e-b4fe6379f001",
+      "TemplateName":"Professional Invoice",
+      "TemplateNameDisplay":null,
+      "Description":"Template containing professional invoice layout",
+      "LogoName":"giant800px-Coca-Cola_logo.svg.png",
+      "Options":4294967295,
+      "Template":null,
+      "Type":1
+   }
+]
+
+#Group Accounts
+
+Resources related to Accounts in the Reckon One API.
+
+##Accounts Collection [/accounts]
+
+- ID (GUID) - The GUID of the account
+- Name (String) - The name of the account
+- Description (String) - The description of the account 
+- AccountType (Number) - The type of the account (0 - Unknown, 1 - Income, 2 - Expense, 3 - Current Asset, 4 - Other current liability, 5 - Equity, 6 - Other Income, 7 - Other Expense, 8 - Cost Of Goods Sold, 9 - Bank, 10 - Accounts Receiveable, 11 - Fixed Assets, 12 - Other non-current asset, 14 - Credit Card, 15 - Accounts Payable, 16 - Non Current liability)
+
+### List all Accounts [GET]
+
++ Response 200 (application/json)
+
+​{  
+   "ID":"00a8aace-e271-4877-a73c-773931e2b48e",
+   "Name":"Sales of tickets ",
+   "Description":"Sales of tickets",
+   "AccountType":1,
+   "AccountStatus":1,
+   "AccountCode":"4-4070"
+}
+
+## Retrieve a single account [/accounts/{accountid}]
+
+### Retrieve a single account [GET]
+
++ Parameters
+  + accountid (GUID) - The id of the account
+
+
++ Response 200 (application/json)
+
+​{  
+   "ID":"00a8aace-e271-4877-a73c-773931e2b48e",
+   "Name":"Sales of tickets ",
+   "Description":"Sales of tickets",
+   "AccountType":1,
+   "AccountStatus":1,
+   "AccountCode":"4-4070"
+}
+
+### Post a single account [POST]
+
++ Request
+
+{  
+   AccountType:1,
+   AccountName:'Bank Fees’,Hint:'   test_Hint',
+   Status:1,
+   TaxGroupId:'D56763CA-EA2F-484A-B475-002779134965',
+   SortOrder:1
+}
+
+
+
+# Group Bank Accounts
+
+Resources related to the Bank Accounts in the Reckon One API.
+
+## Bank Accounts Collection [/bankaccounts]
+
+- Id (GUID) - The GUID of the bank account
+- Name (String) - The name of the bank account
+- Description (String) - The description of the bank account
+- AccountType (Number) - The type of the account (1 - Cash, 2 - Credit Card)
+- IsBankAccountOpened (Boolean) - Whether the bank account is opened or not
+- IsCash (Boolean) - Whether the bank account is cash based or not
+
+### List All Bank Accounts [GET]
+
++ Response 200 (application/json)
+
+[  
+   {  
+      "Id":"01dc34ed-f926-48ba-8b3f-4b0a14e2d390",
+      "Name":"My income 2",
+      "Description":"",
+      "AccountType":1,
+      "AccountStatus":0,
+      "AccountCode":null,
+      "DefaultTaxCode":"",
+      "ParentAccountingCategoryId":"00000000-0000-0000-0000-000000000000",
+      "ExportCode":null
+   }
+]
+
+## Retrieve a single bank account [/bankaccounts/{bankaccountid}]
+
+### Retrieve a single bank account [GET]
+
++ Parameters 
+  + bankaccountid (GUID) - The GUID of the bank account to retrieve
+
++ Response 200
+
+[  
+   {  
+      "Id":"01dc34ed-f926-48ba-8b3f-4b0a14e2d390",
+      "Name":"My income 2",
+      "Description":"",
+      "AccountType":1,
+      "AccountStatus":0,
+      "AccountCode":null,
+      "DefaultTaxCode":"",
+      "ParentAccountingCategoryId":"00000000-0000-0000-0000-000000000000",
+      "ExportCode":null
+   }
+]
+
+
+### Post a single bank account [POST]
+
+- AccountType (Number) - The type of account, cash or credit (1 - Cash, 2 - Credit)
+- BankAccountStatus (Number) - Whether the bank account is open or closed (1 - Open, 2 - Closed)
+- BulkElectronicPaymentSettings - Not used in API
+- IncludeBalancingTransaction (Boolean) - Whether to include a balance transaction for the opening of the account
+- PayerIdentifier (Alphanumeric) - The APCA number for the bank account
+- DateFrom (Date/Time) - The opening date of the account in universal time
+- Description (String) - The description of the bank account
+- EFT (String) - The details of the bank account for electronic payments such as BSB/Account details
+- EFT1 (Numeric) - The BSB of the account
+- EFT2 (Numeric) - The account number of the bank accuont
+- IsCash - Not used in the API
+- LockOffDate (Date/Time) - The account lock off time in universal time
+
++ Request
+
+{  
+   "AccountType":1,
+   "BankAccountStatus":1,
+   "BulkElectronicPaymentSettings":{  
+      "AccountName":"John Citizen",
+      "IncludeBalancingTransaction":true,
+      "PayerIdentifier":"300"
+   },
+   "DateFrom":"2016-10-02T00:00:00",
+   "Description":"My Bank",
+   "EFT":{  
+      "AccountName":"John Citizen",
+      "EFT1":"623866",
+      "EFT2":"20011223"
+   },
+   "IsBankAccountOpened":false,
+   "LockoffDate":"0001-01-01T00:00:00",
+   "OpeningBalance":100.0
+}
+
+
+# Group Contacts
+
+Resources related to Contacts in the Reckon One API.
+
+## Contacts Collection [/contacts]
+
+- ContactID (GUID) - The GUID of the contact
+- CashBookID - The CashBook the contact is from
+- PaymentTermID (GUID) - The payment term that is set against the contact in the Reckon One book
+- CustomerCreditLimit (Number) - Credit limit set against the contact in the Reckon One book
+- IsTpar (Boolean) - Whether the contact is set to appear in the TPAR report or not
+- Description (String) - Description for the contact the user has entered into the Reckon One book
+- FirstNameBranchName (String) - If personal: the first name of the contact, if business: the branch name/number of the business
+- SurnameBusinessName (String) - If personal: the last name of the contact, if business: the business name
+- IsCustomer (Boolean) - Whether the contact is set to a customer type
+- IsSupplier (Boolean) - Whether the contact is set to a supplier type
+- IsActive (Boolean) - Whether the contact is set to active
+- IsPerson (Boolean) - Whether the contact is set as a personal or business contact. True indicates personal, False indicates business
+- MobileCode (Number) - The prefix of the mobile number for the region. In Australia this is typically 04 and in New Zealand 021
+- MobileNumber (Nubmer) - The number of the mobile minus the prefix
+- Email (String) - The email of the contact
+- Website (String) - The website of the contact
+- BusinessNumber1 - The tax registration id of the contact. In Australia this is ABN, In New Zealand it is the IRD number
+- Notes (String) - Notes against the contact
+- AreaCode (Number) - The area code for the phone number of the contact
+- PhoneNumber (Number) - The phone number minus the area code of the contact
+- FaxCode (Number) - The area code for the fax number of the contact
+- FaxNumber (Number) - The fax number of the contact minus the area code
+- IsBusinessAddressDifferent (Boolean) - Indicates whether there is multiple addresses set for the contact
+- IsEmployee (Boolean) - Indicates whether the contact is set to employee
+- Address Array (Array) - Each address contained in an array
+- AddressID (GUID) - The unique id stored in the Reckon One book to identify the address
+- Line1 (String) - Line 1 of the address of the contact
+- Line2 (String) - Line 2 of the address of the contact
+- Line3 (String) - Line 3 of the address of the contact
+- Town (String) - The town of the contact (International Addresses only)
+- Suburb (String) - The suburb of the contact (Domestic Addresses only)
+- State (String) - The state of the contact
+- Postcode (String) - The postcode of the contact. Has validation for Australian addresses of 4 numeric numbers
+- Country (String) - The country of the contact (International Addresses only)
+- AddressType (Boolean) - Type of the address set in the contact
+- IsInternational (Boolean) - Whether this is a international address or not
+
+
+ 
+### List All Contacts [GET]
+
++ Response 200 (application/json)
+
+      
+{  
+   "BookId":"c1b3da90-e9df-4d57-8cfb-71a1d7bfe401",
+   "BookName":"DummyCashbook0",
+   "Bookstatus":3,
+   "Country":"NZ"
+}
+
+### List A Single Contact [GET]
+
++ Parameters
+  + ContactID (GUID) - The GUID of the contact to retrieve
+
++ Resposne 200 (application/json)
+
+{  
+   "BookId":"c1b3da90-e9df-4d57-8cfb-71a1d7bfe401",
+   "BookName":"DummyCashbook0",
+   "Bookstatus":3,
+   "Country":"NZ"
+}
+
+
+
+
+### Create a New Contact [POST]
+
+You may create your own contact using this action. It takes a JSON object
+containing a contacts details.
+
++ Description (string) - The description of the contact
++ SurnameBusinessName (string) - The name of the contact
++ IsTpar (Boolean) - Whether the contact should appear in the TPAR report or not
++ IsCustomer (Boolean) - Whether the contact should be listed as a customer
++ IsSupplier(Boolean) - Whether the contact should be listed as a supplier
++ Addresses (Array) - The array of addresses for the contact
++ AddressType (Business or Postal) - Whether the address is business or Postal
++ Line1 (String) - The first line of the address
++ Line2 (String) - The second line of the address
++ Line3 (String) - The third line of the address
++ IsInternational (Boolean) - Whether the contact is International or not
+
+   
+
++ Request (application/json)
+
+            + Response 200 (application/json)
+
+    + Body
+
+                {  
+   Description:'Desc_AE94D6FA-2BD2-49BF-874F-48720B990E87',
+   SurnameBusinessName:'Name_Business',
+   IsTpar:true,
+   IsCustomer:true,
+   IsSupplier:true,
+   Addresses:[  
+      {  
+         AddressType:'Business',
+         Line1:'addr1_bus',
+         IsInternational:false
+      },
+      {  
+         AddressType:'Postal',
+         Line1:'addr1_pos',
+         IsInternational:true
+      }
+   ]
+}
+
+# Group Items
+
+Resources related to Items in the Reckon One API.
+
+## Items Collection [/items]
+
+- Id (GUID) - The GUID of the item
+- Name/FullName (String) - Name of the item (Name on POST/FullName on GET)
+- SalePrice Number (Number) - The sale price of the item
+- SalePriceTaxInclusive - No longer used in API
+- SaleTaxId (GUID) - The GUID of the tax code associated with the item
+- SaleDescription (String) - The sales description of the item
+- PurchasePrice (Number) - The purchase price of the item
+- PurchaseTaxId (GUID) - The GUID of the tax code associated with the item
+- PurchaseDescription (String) - The purchase description of the item
+- IsActive (Boolean) - Whether the item is active or not
+- IsPurchase (Boolean) - Whether the item is purchased or not
+- IsSold (Boolean) - Whether the item is sold or not
+- ItemCode (String) - The item code of the item
+- ProjectRateApplied (Boolean) - Whether a project rate should be applied to this item
+- SoldOrPurchased (Number) - Whether the item is sold and purchased by the business (0 - Sell only, 1 - Buy Only, 2 - Buy and Sell)
+- ItemStatus (Number) - Whether the item is active in the book or not (0 - Active, 1 - InActive)
+- SaleCategoryID (GUID) - The GUID of the account to be associated with the sales item
+- PurchaseCategoryID (GUID) - The GUID of the account to be associated with the purchase item
+- IsTaxInclusive (Boolean) - Whether the sale and purchase amounts include tax
+- ParentChargeableItemID (GUID) - If the item is a subitem, the GUID of the parent item
+- ItemType (Number) - The type of the item be it a product or service (1 - Product, 2 - Service)
+
+### Retrieve the items list [GET]
+
++ Response 200 
+
+[  
+   {  
+      "Id":"4ca28cda-92f1-4763-9550-0db480cf60d5",
+      "Name":"Milk",
+      "SalePrice":1.8181818182,
+      "SalePriceTaxInclusive":true,
+      "SaleTaxId":"eb2efb72-8b71-4cc3-bf46-6c681a3b63c4",
+      "SaleDescription":"Bottle of Milk",
+      "PurchasePrice":0.9090909091,
+      "PurchasePriceTaxInclusive":true,
+      "PurchaseTaxId":"b64cebe7-14eb-46aa-b83d-dfa352e461b5",
+      "PurchaseDescription":"Purchasing milk",
+      "IsActive":true,
+      "IsPurchased":true,
+      "IsSold":true,
+      "ItemCode":null
+   }
+]
+
+### Retrieve a single item [GET /items/{itemid}]
+
++ Parameters
+  + itemid - The GUID of the item to be retrieved
+
++ Response 200
+
+[  
+   {  
+      "Id":"4ca28cda-92f1-4763-9550-0db480cf60d5",
+      "Name":"Milk",
+      "SalePrice":1.8181818182,
+      "SalePriceTaxInclusive":true,
+      "SaleTaxId":"eb2efb72-8b71-4cc3-bf46-6c681a3b63c4",
+      "SaleDescription":"Bottle of Milk",
+      "PurchasePrice":0.9090909091,
+      "PurchasePriceTaxInclusive":true,
+      "PurchaseTaxId":"b64cebe7-14eb-46aa-b83d-dfa352e461b5",
+      "PurchaseDescription":"Purchasing milk",
+      "IsActive":true,
+      "IsPurchased":true,
+      "IsSold":true,
+      "ItemCode":null
+   }
+]
+
+### Post a single item [POST]
+
++ Request 200 (application/json)
+
+{  
+   'ItemType':1,
+   'Name':'ChocolateNutella,'   SalePrice':5,
+   'SalePriceTaxInclusive':false,
+   'SaleDescription':null,
+   'PurchasePrice':null,
+   'PurchasePriceTaxInclusive':false,
+   'PurchaseTaxId':null,
+   'PurchaseDescription':null,
+   'FullName':null,
+   'ProjectRateApplied':false,
+   'IsActive':false,
+   'IsPurchased':false,
+   'IsSold':false,
+   'SoldOrPurchased':1,
+   'ItemCode':null,
+   'ItemStatus':1,
+   'SaleCategoryId':'7696ebf4-39d1-4a55-9ffe-0ebe135dc4b5',
+   'IsTaxInclusive':false
+}
+
+
+
+#Group Journals
+
+Resources related to journals in the Reckon One API.
+
+## Journals Collection [/journals]
+
+- Adjusting Journal (Boolean) - Whether the journal is adjusting or not
+- AmountTaxStatus (Number) - Whether the amounts on the journal include tax or not (0 - Not utilised, 1 - Non-Taxed, 2 - Inclusive, 3 - Exclusive)
+- CashBookID (GUID) - The GUID of the Reckon One book the journal is from
+- FullDescription (String) - The description of the journal
+- JournalDate (Date/Time) - The date of the journal
+- JournalID (GUID) - The GUID of the journal
+- JournalNumber (Number) - The number of the journal
+- JournalStatus (Number) - The status of the journal (0 - Unknown 1 - Draft, 2 - Posted, 3 - Reversed, 4 - All)
+- JournalType (Number) - The type of the journal (0 - General, 1 - Bank Opening Balance, 2 - Money Transfers)
+- ReverseJournalID (GUID) - The GUID of the reverse journal
+- Summary (String) - The summary of the journal entered by the user
+- Transactions Array (Array) - The individual transactions of the journal
+- AccountingCategoryID (GUID) - The id of the account being used on the line
+- Credit (Number) - The amount being credited on that line
+- Debit (Number) - The amount beign debited on that line
+- IsReconciled (Boolean) - Whether the transaction has been reconciled by the user
+- JournalEntryId (GUID) - The unique GUID assigned to that entry on the journal
+- Narration  (String) - The narration entered for that line transaction on the journal 
+- ProjectID (GUID) - The GUID of the project assigned to the entry on the journal
+- TaxAmount (Number) - The amount of tax assigned to that line in the journal
+- TaxGroupID (GUID) - The unique id of the tax code assigned to that line in the journal
+- TaxModified (Boolean) - Whether the tax has been modified from the books calculation
+- TransType (Number) - The type of transaction that the journal line entry is (0 - Not set, 1 - Sale, 2 - Purchase, 3 - Transfer)
+
+
+### Retrieve a list of journals [GET]
+
++ Response 200 (application/json)
+
+[  
+   {  
+      "AdjustingJournal":false,
+      "AmountTaxStatus":1,
+      "CashbookId":"ac5c6282-6ec2-4e32-85d3-141faa7418dc",
+      "FullDescription":null,
+      "JournalDate":"2015-11-03T00:00:00+00:00",
+      "JournalId":"55200fca-8a9c-43f9-a505-d0b47448ef7b",
+      "JournalNumber":"00005",
+      "JournalStatus":2,
+      "JournalType":0,
+      "JournalTypeRefId":"00000000-0000-0000-0000-000000000000",
+      "ReversedJournalId":"00000000-0000-0000-0000-000000000000",
+      "Summary":"Simon_Test",
+      "Transactions":[  
+         {  
+            "AccountingCategoryId":"fe19d6c0-2a71-410d-839a-3a45677f3edd",
+            "Billable":false,
+            "ContactId":"00000000-0000-0000-0000-000000000000",
+            "Credit":null,
+            "Debit":0.0000,
+            "IsReconciled":false,
+            "JournalEntryId":"4e72a990-0a9f-42f3-a5bc-ef88afa6056d",
+            "JournalId":"55200fca-8a9c-43f9-a505-d0b47448ef7b",
+            "Narration":null,
+            "ProjectId":"00000000-0000-0000-0000-000000000000",
+            "TaxAmount":null,
+            "TaxGroupId":"00000000-0000-0000-0000-000000000000",
+            "TaxModified":false,
+            "TransType":0
+         },
+         {  
+            "AccountingCategoryId":"fe19d6c0-2a71-410d-839a-3a45677f3edd",
+            "Billable":false,
+            "ContactId":"00000000-0000-0000-0000-000000000000",
+            "Credit":null,
+            "Debit":0.0000,
+            "IsReconciled":false,
+            "JournalEntryId":"b91b9d25-247a-4df2-b4ba-9f1aac9fbc53",
+            "JournalId":"55200fca-8a9c-43f9-a505-d0b47448ef7b",
+            "Narration":null,
+            "ProjectId":"00000000-0000-0000-0000-000000000000",
+            "TaxAmount":null,
+            "TaxGroupId":"00000000-0000-0000-0000-000000000000",
+            "TaxModified":false,
+            "TransType":0
+         }
+      ]
+   }
+]
+
+
+### Retrieve a single journal [GET /journals/{journalid}]
+
++ Parameters
+  + journalid - The GUID of the journal to be retrieved
+
++ Response 200
+
+
+ [  
+   {  
+      "AdjustingJournal":false,
+      "AmountTaxStatus":1,
+      "CashbookId":"ac5c6282-6ec2-4e32-85d3-141faa7418dc",
+      "FullDescription":null,
+      "JournalDate":"2015-11-03T00:00:00+00:00",
+      "JournalId":"55200fca-8a9c-43f9-a505-d0b47448ef7b",
+      "JournalNumber":"00005",
+      "JournalStatus":2,
+      "JournalType":0,
+      "JournalTypeRefId":"00000000-0000-0000-0000-000000000000",
+      "ReversedJournalId":"00000000-0000-0000-0000-000000000000",
+      "Summary":"Simon_Test",
+      "Transactions":[  
+         {  
+            "AccountingCategoryId":"fe19d6c0-2a71-410d-839a-3a45677f3edd",
+            "Billable":false,
+            "ContactId":"00000000-0000-0000-0000-000000000000",
+            "Credit":null,
+            "Debit":0.0000,
+            "IsReconciled":false,
+            "JournalEntryId":"4e72a990-0a9f-42f3-a5bc-ef88afa6056d",
+            "JournalId":"55200fca-8a9c-43f9-a505-d0b47448ef7b",
+            "Narration":null,
+            "ProjectId":"00000000-0000-0000-0000-000000000000",
+            "TaxAmount":null,
+            "TaxGroupId":"00000000-0000-0000-0000-000000000000",
+            "TaxModified":false,
+            "TransType":0
+         },
+         {  
+            "AccountingCategoryId":"fe19d6c0-2a71-410d-839a-3a45677f3edd",
+            "Billable":false,
+            "ContactId":"00000000-0000-0000-0000-000000000000",
+            "Credit":null,
+            "Debit":0.0000,
+            "IsReconciled":false,
+            "JournalEntryId":"b91b9d25-247a-4df2-b4ba-9f1aac9fbc53",
+            "JournalId":"55200fca-8a9c-43f9-a505-d0b47448ef7b",
+            "Narration":null,
+            "ProjectId":"00000000-0000-0000-0000-000000000000",
+            "TaxAmount":null,
+            "TaxGroupId":"00000000-0000-0000-0000-000000000000",
+            "TaxModified":false,
+            "TransType":0
+         }
+      ]
+   }
+]
+
+### Post a single journal [POST]
+
++ Request 200 (application/json)
+
+{  
+   "AdjustingJournal":false,
+   "AmountTaxStatus":2,
+   "CashbookId":"c1b3da90-e9df-4d57-8cfb-71a1d7bfe401",
+   "FullDescription":null,
+   "JournalDate":"2015-03-24T00:00:00+00:00",
+   "JournalId":"0d468c1f-a851-4113-ac62-0df67ec5a06e",
+   "JournalNumber":"00198",
+   "JournalStatus":2,
+   "JournalType":0,
+   "JournalTypeRefId":"00000000-0000-0000-0000-000000000000",
+   "ReversedJournalId":"00000000-0000-0000-0000-000000000000",
+   "Summary":"AT Test1",
+   "Transactions":[  
+      {  
+         "AccountingCategoryId":"ba9ae42a-91cf-48e9-882e-90d7d17a9acc",
+         "Billable":false,
+         "ContactId":"00000000-0000-0000-0000-000000000000",
+         "Credit":null,
+         "Debit":10.0000,
+         "IsReconciled":false,
+         "JournalEntryId":"8431abc4-7127-4c59-b71b-bcb0b5cb6d60",
+         "JournalId":"0d468c1f-a851-4113-ac62-0df67ec5a06e",
+         "Narration":null,
+         "ProjectId":"00000000-0000-0000-0000-000000000000",
+         "TaxAmount":null,
+         "TaxGroupId":"00000000-0000-0000-0000-000000000000",
+         "TaxModified":false,
+         "TransType":0
+      },
+      {  
+         "AccountingCategoryId":"9320bebf-cea6-4e2b-acba-d608a922e465",
+         "Billable":false,
+         "ContactId":"00000000-0000-0000-0000-000000000000",
+         "Credit":10.0000,
+         "Debit":null,
+         "IsReconciled":false,
+         "JournalEntryId":"507b15d2-5bd6-43b9-a7d2-cd9b53ab295c",
+         "JournalId":"0d468c1f-a851-4113-ac62-0df67ec5a06e",
+         "Narration":null,
+         "ProjectId":"00000000-0000-0000-0000-000000000000",
+         "TaxAmount":null,
+         "TaxGroupId":"00000000-0000-0000-0000-000000000000",
+         "TaxModified":false,
+         "TransType":0
+      }
+   ]
+}
+
+#Group Payments
+
+Resources related to the payments resources of the Reckon One API
+
+## Payments Collection [/payments]
+
+- ID (GUID) - The unique GUID of the payment
+- CashBookID (GUID) - The unique GUID of the CashBook the payment is from
+- Amount (Number) - The amount of the payment
+- ContactName (String) - The name of the contact paid
+- Details (String) - The details entered against the payment
+- PaymentMethodType (Number) - The way the payment was made (0 - Cash, 1 - Cheque, 2 - Direct Deposit, 3 - EFTPOS, 4 - BPAY, 5 - VISA, 6 - Mastercard, 7 - Diners, 8 - American Express, 9 - Other)
+- PaymentMethodName (String) - The name of the payment method
+- IsReconciled (Boolean) - Whether the payment is reconciled or not
+- Reference (String) - The reference entered for the payment
+- TransDate (Date/Time) - The date of the transaction in universal time
+
+
+### Retrieve a list of payments [GET]
+
++ Response 200 (application/json)
+
+[  
+   {  
+      "Id":"00055f97-ffee-4225-93b8-8e4613b007a4",
+      "CashbookId":"e17417ac-fc79-4d4d-9ee8-1780b3bc326f",
+      "BankAccountId":"00feb5c9-6da3-4603-87d8-d1ee7d6de894",
+      "Amount":11.0000,
+      "ContactName":"AAMI",
+      "Details":"abc",
+      "PaymentMethodType":1,
+      "PaymentMethodName":"Cash",
+      "IsReconciled":false,
+      "Reference":"def",
+      "TransDate":"2015-10-10T00:00:00+00:00"
+   }
+]
+
+### Post a single payment [POST]
+
++ Request 200 (application/json)
+
+
+    {
+      'TransDate': '10/10/2015',
+      'BankAccountId': '5b3a4f48-beb0-4e23-bf2f-2d7127239a00',
+      'Amount': 100,
+      'ContactId': '519403ea-bd33-4b7c-b71a-cd32b8fbe2c8',
+      'AllocateFullAmount': false,
+      'PaymentMethodId': '057ecf9c-b966-4fe5-93e5-edc8812344b3',
+      'Details': 'abc',
+      'Reference': 'def',
+      'IsReconciled': false,
+      'Narration': 'qqq',
+      'Allocations': [ ],
+      'AllocationSplit': [
+        {
+          'ProjectId': '24879c21-8e1f-4f50-b1a0-bb01d3447b7b',
+          'ChargeableItemId': 'af848ea8-cfdb-4768-a6f9-c916a873985f',
+          'LineNo': 1,
+          'Description': null,
+          'Quantity': 0,
+          'UnitPriceExTax': 10,
+          'UnitPriceTax': 1,
+          'UnitPricePrecision': 2,
+          'DiscountAmountExTax': null,
+          'DiscountAmountTax': null,
+          'DiscountAccuracy': null,
+          'DiscountPercent': null,
+          'TaxGroupId': 'fae4ba18-20db-4b35-a944-711f7c3273bb',
+          'TaxIsModified': false,
+          'AmountExTax': 10,
+          'Amount': 0,
+          'TaxAmount': 1,
+          'AmountAccuracy': null,
+          'InvoiceDiscountedAmountExTax': null,
+          'InvoiceDiscountedTaxAmount': null,
+          'HasDataForPosting': false,
+          'IsSubTotal': false,
+          'IsParent': false,
+          'AccountId': '00000000-0000-0000-0000-000000000000'
+        }
+      ]
+    }
+    
+#Group Activity Statement
+
+Resources related to the Activity Statements in the Reckon One API
+
+## Activity Statement Collection [/activitystatements]
+
+    - GSTReportID (GUID) - The unique GUID of the activity statement
+    - DocumentID (String) - The document id entered against the activity statement
+    - Description (String) - The description entered against the activity statement
+    - ReceiptNumber(String) - The receipt number entered against the activity statement
+    - DueDate (Date/Time) - The due date of the activity statement in universal time
+    - LodgeDate (Date/Time) - The lodge date of the activity statement in universal time
+    - StartDate (Date/Time) - The start date of the period for the BAS report
+    - EndDate (Date/Time) - The end date of the period for the BAS report
+    - GSTReportTemplateID (GUID) - The template that has been applied to the GST report
+    - IsAmendment (Boolean) - Whether this BAS report has been marked as amended
+    - Status - Not used yet
+    - AmountTaxStatus - Whether the amounts in the bas are gst inclusive or not (1 - Non Taxed, 2 - Inclusive, 3 - Exclusive)
+    - IncludeFBT (Boolean) - Whether the BAS includes a FBT amount or not
+    - IncludeLCT (Boolean) - Whether the BAS includse a LCT amount or not
+    - IncludePAYGIOption1 (Boolean) - Whether the BAS is set to PAYGI option 1 or not
+    - InculdePAYGIOption2 (Boolean) - Whether the BAS is set to PAYGI option 2 or not
+    - Include PAYGW (Boolean) - Whether the bAS is set to include PAYG withholding or not
+    - IncludeWET (Boolean) - Whether the BAS includes WET tax amounts or not
+    - CompanyName (String) - The name of the company the bas is for
+    - Data (Array) - The array of BAS data
+    - Error (String) - Whether a error was detected with this field on the BAS. Remains the same definition for every field
+    - XBRL (String) - Not used. Future development. Remains the same definition for every field
+    - Label (Number) - The label from the BAS for the data eg 8A. Remains the same definition for every field.
+    - LegalName (String) - The legal name of the company stored in the book
+    - LodgementStatus (Number) - Whether the BAS is marked lodged or not (1 - Draft, 2 - Lodged)
+    - LodgementType (Number) - The way the BAS was lodged (0 - None, 1 - Manual, 2 - Electronic)
+    - ReportType (Number) - Where the report was lodged (0 - None, 1 - AU)
+    - Total (Number) - The total of the BAS refund/bill
+
+### Retrieve a list of activity statements [GET]
+
++ Response 200 (application/json)
+
+    [  
+   {  
+      "GSTReportID":"17444bf7-9aab-4dfe-967e-d5ac2dac9ea9",
+      "CashbookID":"00000000-0000-0000-0000-000000000000",
+      "DocumentID":null,
+      "Description":"Annual report 2013/2014 with all options (PAYG1) nnnnn",
+      "ReceiptNumber":null,
+      "DueDate":null,
+      "LodgeDate":null,
+      "StartDate":"2013-07-01T00:00:00+12:00",
+      "EndDate":"2014-06-30T00:00:00+12:00",
+      "GSTReportTemplateID":"00000000-0000-0000-0000-000000000000",
+      "IsAmendment":false,
+      "Status":1,
+      "PeriodInDays":0
+   }
+]
+
+
+### Retrieve a single activity statement [GET /activitystatements/{activitystatementid}]
+
++ Parameters
+  + activitystatementid - GUID of the activity statement to be retrieved
+
++ Response 200 (application/json)
+
+{
+  "BASPreferences": {
+    "AmountTaxstatus": 2,
+    "CashbookID": "00000000-0000-0000-0000-000000000000",
+    "IncludeFBT": false,
+    "IncludeFTC": false,
+    "IncludeLCT": false,
+    "IncludePAYGIOption1": true,
+    "IncludePAYGIOption2": false,
+    "IncludePAYGW": false,
+    "IncludeWET": true,
+    "ReportingPeriodType": "54041267-bc3a-4aef-8cb9-2b36f8be1d03"
+  },
+  "CashbookId": "e17417ac-fc79-4d4d-9ee8-1780b3bc326f",
+  "CompanyName": "ABC Building",
+  "Data": [
+    {
+      "Error": null,
+      "Label": "9a",
+      "Value": null,
+      "Xbrl": null
+    },
+    {
+      "Error": null,
+      "Label": "8B",
+      "Value": null,
+      "Xbrl": null
+    },
+    {
+      "Error": null,
+      "Label": "8A",
+      "Value": null,
+      "Xbrl": null
+    },
+    {
+      "Error": null,
+      "Label": "9",
+      "Value": "0",
+      "Xbrl": null
+    },
+    {
+      "Error": null,
+      "Label": "9b",
+      "Value": null,
+      "Xbrl": null
+    }
+  ],
+  "GSTReportId": "44713e4e-1f7a-40b8-b51d-9a5c3fc671af",
+  "LegalName": "ABC Building Pty Ltd",
+  "Lodgement": {
+    "CashbookId": "e17417ac-fc79-4d4d-9ee8-1780b3bc326f",
+    "Description": null,
+    "DocumentId": null,
+    "DueDate": null,
+    "EndDate": "2017-03-31T00:00:00",
+    "GSTReportId": "44713e4e-1f7a-40b8-b51d-9a5c3fc671af",
+    "IsAmendment": false,
+    "LodgeDate": null,
+    "LodgementStatus": 1,
+    "LodgementType": 0,
+    "PeriodInDays": 0,
+    "ReceiptNumber": null,
+    "StartDate": "2017-01-01T00:00:00"
+  },
+  "ReportType": 1,
+  "TemplateId": "79a11efe-dec4-43d1-a9e3-715dc26c2220",
+  "Total": 0.0
+}
+
+
+
+#Group Bills
+
+Resources related to bills in the Reckon One API
+
+## Bills Collection [/bills]
+
+- BillID (GUID) - The GUID of the bill
+- AccountsPayableCategoryID (GUID) - The GUID of the accounts payable account linked to the bill
+- Balance (Number) - The outstandig balance of the bill
+- BillDate (Date/Time) - The date of the bill in universal time
+- BillNumber (String) - The number of the bill
+- CustomerID (GUID) - The unique ID of the contact linked to the bill
+- CustomerName (String) - The name of the contact linked to the bill
+- Notes (String) - The notes for the bill
+- Reference (String) - The reference for the bill
+- Status (Number) - The status of the bill ( 1- Draft, 2 - Approved, 3 - Paid)
+- IsOverdue (Boolean) - Whether the bill is overdue or not
+- ClassificationID - The id any any classification assigned to the bill
+- SupplierID (GUID) - The GUID of the supplier for the bill
+- AmountTaxStatus (Number) - The tax status of the bill (0 - Unknown, 1 - Non Taxed, 2 - Approved, 3 - Paid)
+- Status (Number) - The status of the bill (1 - Draft, 2 - Approved, 3 - Paid)
+- BillAmount (Number) - The total of the bill
+- BillDiscountAmount (Number) - The amount of discount applied to the bill
+- BillDiscountPercentage (Number) - The amount of discount applied to the bill as a percentage
+- BillTax (Number) - The tax amount for the bill
+- TemplateID (GUID) - The template being used with the bill
+- SendDate (Date/Time) - The send date of the bill
+- DueDate (Date/Time) - The due date of the bill
+- LineItems (Array) - The array of each line item for the bill
+- AccountingCategoryID (GUID) - The GUID of the account applied to the line
+- ProjectID (GUID) - The GUID of the project to be assigned to the line of the bill
+- ChargeableItemId (GUID) - The GUID for the item being applied to the line
+- LineNo (Number) - The number of the line of the bill. Each new line must be a new number and individual array entry
+- Description (String) - The description for the line
+- Quantity (Number) - The quantity for the line
+- UnitPriceExTax (Number) - The unit price of the line without tax
+- UnitPriceTax (Number) - The unit price tax of the line
+- DiscountAmountExTax (Number) - The amount of a discount without the tax component for the line
+- DiscountAmountTax (Number) - The amount of tax for the line with the discount applied
+- DiscountPercent (Number) - The amount of the discount in percent
+- TaxGroupID (GUID) - The tax group to apply to the line
+- TaxIsModified (Boolean) -   If its false, your tax calculations will be compared against the Reckon One tax engine and if it does not match the transaction is blocked. If set to true, the engine is not checked and you can post any tax you desire. The UI also controls this function via SETTINGS for the same purpose.
+- AmountExTax (Number) - The amount of the line minus tax
+- HasDataForPosting (Boolean) - ALWAYS POST THIS AS TRUE
+- Amount (Number) - The amount of the line total
+- TaxAmount (Number) - The amount of the tax of the line
+- InvoiceDiscountedAmountExTax (Number) - The amount fo the line with discounts applied ex-tax
+- InvoiceDiscountedAmountTaxAmount (Number) - The amount of tax discounted on the line
+- IsHidden (Boolean) - Whether the line is hidden on the bill
+- AccountID (GUID) - If a account not a item is being used for the line, set that here with the account GUID
+- ClassificationID (GUID) - The classification to apply to the transaction
+
+### Retrieve a list of bills [GET]
+
++ Response 200 (application/json)
+
+[  
+   {  
+      "BillID":"019a76a4-af90-47ea-beaf-760e91a53aa5",
+      "AccountsPayableCategoryID":"4ba37c05-eca4-4c02-a4d7-e72b3e9d4247",
+      "ClassificationID":"569a76a4-af90-47ea-bfiaf-7623e91a53yt5",
+      "Balance":0.0,
+      "BillAmount":0.0000,
+      "BillDate":"2016-03-13T00:00:00+00:00",
+      "BillNumber":"BIL0112",
+      "CustomerID":"00bb3e7f-bf7d-4533-bb1c-57cfd3917817",
+      "CustomerName":"AAMI",
+      "Notes":null,
+      "Reference":null,
+      "Status":1,
+      "IsOverdue":false
+   }
+}
+]
+
+### Retrieve a single bill [GET /bills/{billid}]
+
++ Parameters
+  billid - The unique GUID of the bill to be retrieved
+
++ Response 200 (application/json)
+
+[  
+   {  
+      "BillID":"019a76a4-af90-47ea-beaf-760e91a53aa5",
+      "AccountsPayableCategoryID":"4ba37c05-eca4-4c02-a4d7-e72b3e9d4247",
+      "ClassificationID":"569a76a4-af90-47ea-bfiaf-7623e91a53yt5",
+      "Balance":0.0,
+      "BillAmount":0.0000,
+      "BillDate":"2016-03-13T00:00:00+00:00",
+      "BillNumber":"BIL0112",
+      "CustomerID":"00bb3e7f-bf7d-4533-bb1c-57cfd3917817",
+      "CustomerName":"AAMI",
+      "Notes":null,
+      "Reference":null,
+      "Status":1,
+      "IsOverdue":false
+   }
+}
+]
+
+
+### Post a single bill [POST]
+
++ Request 200
+
+{  
+   'SupplierId':'00bb3e7f-bf7d-4533-bb1c-57cfd3917817',
+   'CashbookId':'e17417ac-fc79-4d4d-9ee8-1780b3bc326f',
+   'AmountTaxStatus':3,
+   'AccountsPayableAccountingCategoryId':'744d3fe1-fa28-4dab-8ad7-8577af04ed6f',
+   'Status':1,
+   'BillAmount':0.0,
+   'BillDiscount':null,
+   'BillDiscountAmount':null,
+   'BillDiscountPercentage':null,
+   'BillTax':0.0,
+   'Notes':null,
+   'Reference':null,
+   'TemplateId':'8d1717e4-cf39-46e3-b631-8edfeaf8da78',
+   'BillDate':'2016-03-13T00:00:00',
+   'SendDate':null,
+   'DueDate':null,
+   'ClassificationID':' 
+135185b5-33ba-4003-8501-92e3dca29dd9',
+   'BillSourceId':'00000000-0000-0000-0000-000000000000',
+   'LineItems':[  
+      {  
+         'BillId':'00000000-0000-0000-0000-000000000000',
+         'AccountingCategoryId':'744d3fe1-fa28-4dab-8ad7-8577af04ed6f',
+         'ProjectId':'e52687e1-d598-4a32-b9ba-0f0370f5e94e',
+         'ChargeableItemId':'026cedf5-7f0e-4cf2-889b-dd51bf760b78',
+         'LineNo':1,
+         'Description':null,
+         'Quantity':null,
+         'UnitPriceExTax':0.0,
+         'UnitPriceTax':0.0,
+         'UnitPricePrecision':2.0,
+         'DiscountAmountExTax':null,
+         'DiscountAmountTax':null,
+         'DiscountAccuracyDiscountPercent':null,
+         'TaxGroupId':null,
+         'TaxIsModified':false,
+         'AmountExTax':0.0,
+         'Amount':0.0,
+         'TaxAmount':null,
+         'AmountAccuracy':null,
+         'InvoiceDiscountedAmountExTax':0.0,
+         'InvoiceDiscountedTaxAmount':null,
+         'HasDataForPosting':true,
+         'IsSubTotal':false,
+         'IsParent':false,
+         'IsHidden':false,
+         'AccountId':null,
+         'PrintGroupAsSingleLine':false
+      }
+   ],
+   'Address':null
+}
+
+#Group Credit Notes
+
+Resources related to Credit Notes in the Reckon One API
+
+## Credit Note Collection [/creditnotes]
+
+- CreditNoteNumber (String) - The number that is assigned to the credit note
+- CustomerID (GUID) - The GUID of the contact assigned to the credit note
+- CashBookID (GUID) - The GUID of the cashbook that has the credit note
+- AmountTaxStatus (Number) - The tax status of the credit note (8 - Unknown, 9 - Non Taxed, 10 - Inclusive, 11 - Exclusive)
+- Amount (Number) - The total amount of the credit note 
+- Tax (Number) - The total amount of tax for the credit note
+- Notes (String) - The notes to be applied to the transaction
+- Reference (String) - The reference for the credit note
+- TemplateID (GUID) - The template assigned to the credit note
+- CreditNoteDate (Date/Time) - The date of the credit note
+- LineItems (Array) - The array of the individual line items for the credit note
+- Amount (Number) - The amount of the line in the credit note
+- ChargeableItemID (GUID) - The unique id of the item on that line of the credit note
+- LineNo (Number) - The order that the lines appear on the credit note
+- Description (String) - The description for that line on the credit note
+- Quantity (Number) - The quantity for that line on the credit note
+- ProjectID (GUID) - The GUID of any project assigned to the line on the credit note
+- UnitPriceExTax (Number) - The amount of the item on the line without tax
+- UnitPriceTax (Number) - The tax amount for the item on the line
+- UnitPriceTaxInclusive (Boolean) - Whether the unit price is a gross amount or not
+- TaxGroupID (GUID) - The tax group applied to the line on the credit note
+- TaxIsModified (Boolean) - If its false, your tax calculations will be compared against the Reckon One tax engine and if it does not match the transaction is blocked. If set to true, the engine is not checked and you can post any tax you desire. The UI also controls this function via SETTINGS for the same purpose.
+- HasDataForPosting - ALWAYS TRUE
+- TaxAmount (Number) - The amount of tax applied to the line on the credit note
+- AmountExTax (Number) - The amount of money applied to the line without tax on the credit note
+- Address (String) - The address to be applied to the credit note
+
+
+### Retrieving a list of credit notes [GET]
+
++ Response 200 (application/json)
+
+[  
+   {  
+      "Id":"015cc8f0-fafe-4b27-9fb1-521898debeed",
+      "CashbookId":"35ab8405-cf6f-4dc4-b703-1ccf40c5c234",
+      "AccountsReceivableCategoryId":"5db31ca3-f3fd-41e4-9293-fd745a99c6a5",
+      "Balance":130.8800,
+      "CreditNoteAmount":130.8800,
+      "CreditNoteDate":"2016-07-28T00:00:00+12:00",
+      "CreditNoteNumber":"CAN0053",
+      "CustomerId":"c41b819e-ac67-46eb-abe6-bba8559f2fe7",
+      "CustomerName":"Credit100",
+      "Notes":"Note 123345434543",
+      "Reference":"1234WEDWQEQWEQW",
+      "Status":2
+   }
+]
+
+### Retrieving a single credit note [GET /creditnotes/{creditnoteid}]
+
++ Parameters
+  + creditnoteid - The GUID of the credit note to retrieve
+
++ Response 200
+
+[  
+   {  
+      "Id":"015cc8f0-fafe-4b27-9fb1-521898debeed",
+      "CashbookId":"35ab8405-cf6f-4dc4-b703-1ccf40c5c234",
+      "AccountsReceivableCategoryId":"5db31ca3-f3fd-41e4-9293-fd745a99c6a5",
+      "Balance":130.8800,
+      "CreditNoteAmount":130.8800,
+      "CreditNoteDate":"2016-07-28T00:00:00+12:00",
+      "CreditNoteNumber":"CAN0053",
+      "CustomerId":"c41b819e-ac67-46eb-abe6-bba8559f2fe7",
+      "CustomerName":"Credit100",
+      "Notes":"Note 123345434543",
+      "Reference":"1234WEDWQEQWEQW",
+      "Status":2
+   }
+]
+
+### Posting a single credit note [POST]
+
++ Request 200 (application/json)
+
+
+{  
+   'CreditNoteNumber':null,
+   'CustomerId':'c41b819e-ac67-46eb-abe6-bba8559f2fe7',
+   'CashbookId':'35ab8405-cf6f-4dc4-b703-1ccf40c5c234',
+   'AmountTaxStatus':2,
+   'Amount':130.88   ’,
+   'Tax':30.88,
+   'Notes':'Note 123345434543',
+   'Reference':'1234WEDWQEQWEQW',
+   'TemplateId':'6e8025ce-f822-4fd1-9e3b-3adbca571488',
+   'CreditNoteDate':'2016-07-28T00:00:00',
+   'LineItems':[  
+      {  
+         'Amount':130.88,
+         'AmountAccuracy':null,
+         'InvoiceDiscountedAmountExTax':100.0,
+         'InvoiceDiscountedTaxAmount':30.88,
+         'HasDataForPosting':true,
+         'IsSubTotal':false,
+         'IsParent':false,
+         'IsHidden':false,
+         'AccountId':null,
+         'PrintGroupAsSingleLine':false,
+         'ChargeableItemId':'fc342bc0-3fc0-49b5-8e94-04c6b43861f6',
+         'LineNo':1,
+         'Description':null,
+         'Quantity':null,
+         'ProjectId':'14945bb1-bbaa-4495-9634-20da9de6a890',
+         'UnitPriceExTax':100.001,
+         'UnitPriceTax':30.87478874,
+         'UnitPricePrecision':3.0,
+         'UnitPriceIsTaxInclusive':false,
+         'TaxGroupId':'52b79b23-b498-4758-83cd-a29715c0bb7e',
+         'TaxIsModified':false,
+         'TaxAmount':30.88,
+         'AmountExTax':100.001
+      }
+   ],
+   'Address':null
+}
+
+### Apply a credit note [POST /allocations/applycredit]
+
++ Request 200
+
+{  
+   'Amount':10.0,
+   'SourceType':1,
+   'TargetType':4,
+   'SourceRefId':'60c1192c-21ea-4481-a1eb-6dd7794a8584',
+   'TargetRefId':'00cec5ee-849c-4bc5-a452-fcb45802b8a2'
+}
+
+#Group Supplier Credit Notes
+
+Resources related to Supplier Credit Notes in Reckon One API
+
+## Supplier Credit Notes Collection [/suppliercreditnotes]
+
+- SupplierCreditNoteNumber (Number) - The number assigned to the supplier credit note
+- SupplierID (GUID) - The GUID of the supplier the credit note is assigned to
+- AmountTaxStatus (Number) - The tax status of the credit note (1 - Non Inclusive, 2 - Inclusive)
+- Amount (Number) - The total amount of the supplier credit note without discounts
+- DiscountAmount (Number) - Any discounts applied to the supplier credit note
+- DiscountPercentage (Number) - Any discounts applied to the supplier credit note as a percentage
+- LineItems (Array) - Array that contains the individual lines of the supplier credit note
+- AccountingCategoryID (GUID) - The GUID of the account the line is associated with
+- Amount (Number) - The amount for the line
+- AmountAccuracy (Number) - How many decimal points are associated with the supplier credit note. Maximum 8. Default 2.
+- AmountExTax  (Number) - The amount of the line minus any tax
+- ChargeableItemID (GUID) - The GUID of the item applied to the line.
+- Description (String) - The description applied to the line 
+- DiscountAmountExTax (Number)- The amount of the line without any tax after any discounts applied
+- DiscountAmountTax (Number) - The tax amount of the line with any discounts applied
+- DiscountPercent (Number) - Any discount applied to the line as a percentage
+- InvoiceDiscountedAmountExTax (Number) - The amount of the line without tax after any discounts applied
+- InvoiceDiscountedTaxAmount (Number) - The amount of tax for the line with any discounts applied
+- IsHidden (Boolean) - Whether the line should appaer on the supplier credit note when viewed
+- IsSubTotal (Boolean) - Whether the line is a subtotal line 
+- ProjectID (GUID) - The GUID of the project assigend to the line
+- Quantity (Number) - The quantity for the line
+- TaxAmount (Number) - The tax amount for the line
+- TaxGroupID (GUID) - The tax group for the line
+- TaxIsModified (Boolean) -   If its false, your tax calculations will be compared against the Reckon One tax engine and if it does not match the transaction is blocked. If set to true, the engine is not checked and you can post any tax you desire. The UI also controls this function via SETTINGS for the same purpose.
+- HasDataForPosting - ALWAYS TRUE
+- UnitPriceExTax (Number) - The sale amount minus tax of the units (when chargeable items are included)
+- UnitPriceisTaxInclusive (Boolean) - Whether the unit price includes tax or not
+- UnitPricePrecision (Number) - How many decimal places are applied to the unit price. This can be up to 8. Default is 2.
+- UnitPriceTax (Number) - The tax amount of the units (when chargeable items are included)
+- Notes (String) - Any notes applied to the supplier credit note
+- Reference (String) - Any reference applied to the supplier credit note
+- SupplierCreditNoteDate (Date/Time) - The date the supplier credit note is for
+- SupplierCreditNoteNumber (String) - The number of the supplier credit note
+- SupplierID (GUID) - The GUID of the contact the supplier credit note is applie to
+- Tax (Number) - The total tax of the supplier credit note
+- TemplateID (GUID) - The id of the template applied to the supplier credit note
+
+
+### Retrieve a list of supplier credit notes [GET]
+
++ Response 200 (application/json)
+
+
+{  
+   "Id":"11daf446-250e-4b16-ad4d-c2ee2db80693",
+   "AccountsPayableCategoryID":"4ba37c05-eca4-4c02-a4d7-e72b3e9d4247",
+   "Balance":10.0000,
+   "BillAmount":10.0000,
+   "BillDate":"2015-06-03T00:00:00+00:00",
+   "BillNumber":"SAN0005",
+   "Notes":null,
+   "Reference":null,
+   "Status":2,
+   "SupplierID":"b09da867-1e2c-48e3-a9db-dd21b427a6bb",
+   "SupplierName":"City Rail"
+}
+
+### Retrieve a single supplier credit note [GET /suppliercreditnotes/{suppliercreditnoteid}]
+
++ Parameters
+  + suppliercreditnoteid - The GUID of the supplier credit note to retrieve
+
++ Resposne 200 (application/json)
+
+{  
+   "Id":"11daf446-250e-4b16-ad4d-c2ee2db80693",
+   "AccountsPayableCategoryID":"4ba37c05-eca4-4c02-a4d7-e72b3e9d4247",
+   "Balance":10.0000,
+   "BillAmount":10.0000,
+   "BillDate":"2015-06-03T00:00:00+00:00",
+   "BillNumber":"SAN0005",
+   "Notes":null,
+   "Reference":null,
+   "Status":2,
+   "SupplierID":"b09da867-1e2c-48e3-a9db-dd21b427a6bb",
+   "SupplierName":"City Rail"
+}
+
+
+### Post a single supplier credit note [POST]
+
++ Request 200
+
+{  
+   'SupplierCreditNoteNumber':null,
+   'SupplierId':'e38db1f9-cbe6-4b4a-a1b6-fc4c7f1ac41c',
+   'AmountTaxStatus':2,
+   'Amount':1.0,
+   'DiscountAmount':null,
+   'DiscountPercentage':null,
+   'Tax':0.09,
+   'Notes':'azp_test',
+   'Reference':'110',
+   'TemplateId':'a70ea585-8288-47ea-b813-d105d201caeb',
+   'SupplierCreditNoteDate':'2016-08-22T00:00:00',
+   'LineItems':[  
+      {  
+         'AccountingCategoryId':'0d995c57-3d53-40c5-a6a5-79c213af087a',
+         'DiscountAmountExTax':null,
+         'DiscountAmountTax':null,
+         'DiscountAccuracy':null,
+         'DiscountPercent':null,
+         'Amount':1.0,
+         'AmountAccuracy':null,
+         'InvoiceDiscountedAmountExTax':0.91,
+         'InvoiceDiscountedTaxAmount':0.09,
+         'HasDataForPosting':true,
+         'IsSubTotal':false,
+         'IsParent':false,
+         'IsHidden':false,
+         'AccountId':null,
+         'PrintGroupAsSingleLine':false,
+         'ChargeableItemId':'fa2137a5-0860-4fdb-97e7-95d0a26368d2',
+         'LineNo':1,
+         'Description':null,
+         'Quantity':null,
+         'ProjectId':'3f638981-e363-4c1c-be28-3850f4f643da',
+         'UnitPriceExTax':0.9090909091,
+         'UnitPriceTax':0.0909090909,
+         'UnitPricePrecision':2.0,
+         'UnitPriceIsTaxInclusive':false,
+         'TaxGroupId':'a23b1b14-40e1-4cd2-a60a-0d6fa995c1e1',
+         'TaxIsModified':false,
+         'TaxAmount':0.09,
+         'AmountExTax':0.9091
+      }
+   ],
+   'SupplierCreditNoteSourceId':'00000000-0000-0000-0000-000000000000'
+}
+
+
+#Group Estimates
+
+Resources related to estimates in the Reckon One API
+
+## Estimates Collection [/estimates]
+
+- CustomerID (GUID) - The GUID of the customer associated with the estimate
+- EstimateDate (Date/Time) - The date of the estimate in universal time
+- EstimateAmount (Number) - The total of the estimate
+- AmountTaxStatus (Number) - Whether the transaction is tax inclusiev or not (1 - Not Tax Inclusive, 2 - Tax Inclusive)
+- Notes (String) - The notes associated with the estimate
+- Reference (String) - The reference associated with the estimate
+- TemplateID (GUID) - The template used with the estimate
+- ExpiryDate (Date/Time) - The expiry date of the estimate in universal date time format
+- SendDate (Date/Time) - The send date of the estimate in universal date time format
+- EstimateTax (Number) - The total tax of the estimate
+- LineItems (Array) - The array of the line items for the estimaet
+- AccountID (GUID) - The GUID of the account applied to the line
+- Amount (Number) - The amount for the line
+- AmountAccuracy (Number) - The number of decimal places associated with the line. Maximum is 8. Default is 2.
+- AmountExTax (Number) - The amount of the line without tax
+- ChargeableItemID (GUID) - The GUID of the item applied to the line 
+- Description (String) - The description for the line
+- DiscountAccuracy (Number) - The number of decimal places for any discount applied to the line
+- DiscountAmountExTax (Number) - The amount of any discount for the line minus tax
+- DiscountAmountTax (Number) - The tax amount to be applied to any discount on the line
+- DiscountPercent (Number) - Any discount applied to the line as a percentage
+- InvoiceDiscountedAmountExTax (Number) - The discounted amount of the line without tax
+- InvoiceDiscountedTaxAmount (Number) - The discounted tax amount of the line
+- IsHidden (Boolean) - Whether the line is hidden or not
+- IsParent (Boolean) - Whether this line is the parent of any other lines
+- IsSubTotal (Boolean) - Whether this is a subtotal line
+- LineNo (Number) - The line number on the estimate. Each line must be a new number and array entry
+- MarkUpAmountExTax (Number) - The amount of markup minus any tax amount
+- MarkUpAmountTax (Number) - Any tax amount being applied to the markup
+- MarkUpPercetage (Number) - The eprcentage of any markup applied to the line. This can be used instead of amounts
+- PrintGroupAsSingleLine (Boolean) - Whether there are grouped lines on the transaction
+- ProjectID (GUID) - The project applied to the line
+- Quantity (Number) - The quantity applied to the line
+- TaxAmount (Number) - The amount of tax applied to the line
+- TaxGroupID (GUID) - The unique GUID of the tax group applied to the line
+- TaxsModified (Boolean) -  If its false, your tax calculations will be compared against the Reckon One tax engine and if it does not match the transaction is blocked. If set to true, the engine is not checked and you can post any tax you desire. The UI also controls this function via SETTINGS for the same purpose.
+- UnitPriceExTax (Number) - The amount applied to individual units on the line without tax
+- UnitPriceisTaxInclusive (Boolean) - Whether the unit price is gross or net
+- UnitPricePrecision (Number) - The amount of decimal points to apply to the unit price. Up to 8. Default is 2.
+- UnitPriceTax (Number) - The amount of tax to apply to the unit price.
+
+### Retrieving the list of estimates [GET]
+
++ Response 200 (application/json)
+
+{  
+   "Id":"ea3435fd-841e-4f0a-8555-a5dc79bde281",
+   "CashbookId":"0da93f9e-acb7-4bb0-b66d-a124e02dbe39",
+   "CustomerId":"fec28ebc-f916-4544-8257-017649d45211",
+   "CustomerName":"Aportis",
+   "Amount":220.0000,
+   "Date":"2016-06-15T00:00:00+00:00",
+   "ExpiryDate":"2016-06-30T00:00:00+00:00",
+   "Number":"EST0002",
+   "Reference":"1234",
+   "Status":3
+}
+
+### Retrieving a individual estimate [GET /estimates/{estimateid}]
+
++ Parameters
+  + estimateid - The unique GUID of the estimate to be retrieved
+
++ Response 200 (application/json)
+
+{  
+   "Id":"ea3435fd-841e-4f0a-8555-a5dc79bde281",
+   "CashbookId":"0da93f9e-acb7-4bb0-b66d-a124e02dbe39",
+   "CustomerId":"fec28ebc-f916-4544-8257-017649d45211",
+   "CustomerName":"Aportis",
+   "Amount":220.0000,
+   "Date":"2016-06-15T00:00:00+00:00",
+   "ExpiryDate":"2016-06-30T00:00:00+00:00",
+   "Number":"EST0002",
+   "Reference":"1234",
+   "Status":3
+}
+
+
+### Post a single estimate [POST]
+
++ Request 200 (application/json)
+
+
+    {  
+   'SupplierCreditNoteNumber':null,
+   'SupplierId':'e38db1f9-cbe6-4b4a-a1b6-fc4c7f1ac41c',
+   'AmountTaxStatus':2,
+   'Amount':1.0,
+   'DiscountAmount':null,
+   'DiscountPercentage':null,
+   'Tax':0.09,
+   'Notes':'azp_test',
+   'Reference':'110',
+   'TemplateId':'a70ea585-8288-47ea-b813-d105d201caeb',
+   'SupplierCreditNoteDate':'2016-08-22T00:00:00',
+   'LineItems':[  
+      {  
+         'AccountingCategoryId':'0d995c57-3d53-40c5-a6a5-79c213af087a',
+         'DiscountAmountExTax':null,
+         'DiscountAmountTax':null,
+         'DiscountAccuracy':null,
+         'DiscountPercent':null,
+         'Amount':1.0,
+         'AmountAccuracy':null,
+         'InvoiceDiscountedAmountExTax':0.91,
+         'InvoiceDiscountedTaxAmount':0.09,
+         'HasDataForPosting':true,
+         'IsSubTotal':false,
+         'IsParent':false,
+         'IsHidden':false,
+         'AccountId':null,
+         'PrintGroupAsSingleLine':false,
+         'ChargeableItemId':'fa2137a5-0860-4fdb-97e7-95d0a26368d2',
+         'LineNo':1,
+         'Description':null,
+         'Quantity':null,
+         'ProjectId':'3f638981-e363-4c1c-be28-3850f4f643da',
+         'UnitPriceExTax':0.9090909091,
+         'UnitPriceTax':0.0909090909,
+         'UnitPricePrecision':2.0,
+         'UnitPriceIsTaxInclusive':false,
+         'TaxGroupId':'a23b1b14-40e1-4cd2-a60a-0d6fa995c1e1',
+         'TaxIsModified':false,
+         'TaxAmount':0.09,
+         'AmountExTax':0.9091
+      }
+   ],
+   'SupplierCreditNoteSourceId':'00000000-0000-0000-0000-000000000000'
+}
+
+
+#Group Invoices
+
+Resources related to invoices in the Reckon One API
+
+## Invoices Collection [/invoices]
+
+- CustomerID (GUID) - The GUID of the contact associated with the invoice
+- AmountTaxStatus (Number) - The tax status of the invoice (0 - Non Inclusive, 1 - Inclusive)
+- InvoiceAmount (Number) - The total amount of the invoice 
+- InvoiceDiscountAmount (Number) - The total discount amount of the invoice
+- InvoiceDiscountPercentage (Number) - The total discount amount as a percentage of the invoice
+- InvoiceTax (Number) - The total amount of tax of the invoice
+- Notes (String) - Any notes for the invoice
+- Reference (String) - The reference for the invoice
+- TemplateID (GUID) - The GUID of the template applied to the invoice
+- InvoiceDate (Date/Time) - The date of the invoice
+- DueDate (Date/Time) - The due date of the invoice
+- LineItems (Array) - The array of lines in the invoice
+- DiscountAmountExTax (Number) - Amount of a discount exculding the tax component of the discount for that line of the invoice
+- DiscountPercent (Number) - The amount of a discount for the line as a percentage
+- Amount (Number) - The total amount for the line
+- InvoiceDiscountedAmountExTax (Number) - The amount of the invoice line when discounted without tax component
+- InvoiceDiscountedTaxAmount (Number) - The amount of the tax for the invoice line
+- IsHidden (Boolean) - Whether the line is hidden on the invoice or not
+- HasDataForPosting (Boolean) - ALWAYS TRUE
+- ChargeableItemID (GUID) - The item being applied to the invoice line
+- LineNo (Number) - The line of the invoice. Each line must be a new number and array entry
+- AccountID (GUID) - The GUID of the account being used in the line if a item is not used
+- Description (String) - The description for the line
+- Quantity (Number) - The quantity for the line
+- ProjectID (GUID) - The GUID of the project applied to the line
+- UnitPriceExTax (Number) - The unit price without tax
+- UnitPriceTax (Number) - The amount of tax in the unit price
+- UnitPriceIsTaxInclusiev (Boolean) - Whether the unit price should be deemed tax inclusive on the invoice
+- TaxGroupID (GUID) - The tax group to apply to the line
+- TaxIsModified (Boolean) -   If its false, your tax calculations will be compared against the Reckon One tax engine and if it does not match the transaction is blocked. If set to true, the engine is not checked and you can post any tax you desire. The UI also controls this function via SETTINGS for the same purpose.
+- TaxAmount (Number) - Tax amount for the line
+- AmountExTax (Number) - The amount of the line excluding tax
+
+
+### Retrieve a list of invoices [GET]
+
++ Response 200 (application/json)
+
+{  
+   "Id":"007beb13-028c-42b5-acd3-b9f871283407",
+   "CashbookID":"c1b3da90-e9df-4d57-8cfb-71a1d7bfe401",
+   "InvoiceNumber":"INV0047",
+   "InvoiceOrder":43,
+   "Balance":5.0000,
+   "CustomerID":"492c0830-99ee-481f-9596-23f15b8ebed9",
+   "CustomerName":"J customer",
+   "InvoiceAmount":5.0000,
+   "InvoiceDate":"2015-03-23T00:00:00+00:00",
+   "DueDate":"2015-04-04T00:00:00+00:00",
+   "Status":2,
+   "Reference":null,
+   "Notes":null,
+   "IsOverdue":true
+}
+
+### Retrieve a specific invoice [GET /invoices/{invoiceid}]
+
++ Parameters
+  + invoiceid - The unique GUID of the invoice to be retrieved
+
+
++ Response 200 (application/json)
+
+
+{  
+   "Id":"007beb13-028c-42b5-acd3-b9f871283407",
+   "CashbookID":"c1b3da90-e9df-4d57-8cfb-71a1d7bfe401",
+   "InvoiceNumber":"INV0047",
+   "InvoiceOrder":43,
+   "Balance":5.0000,
+   "CustomerID":"492c0830-99ee-481f-9596-23f15b8ebed9",
+   "CustomerName":"J customer",
+   "InvoiceAmount":5.0000,
+   "InvoiceDate":"2015-03-23T00:00:00+00:00",
+   "DueDate":"2015-04-04T00:00:00+00:00",
+   "Status":2,
+   "Reference":null,
+   "Notes":null,
+   "IsOverdue":true
+}
+
+### Posting a single invoice [POST]
+
++ Request 200 (application/json)
+
+{  
+   'CustomerId':'9b4b615f-2815-4f9c-a765-d7f8517cea6a',
+   'AmountTaxStatus':2,
+   'InvoiceAmount':2.0000,
+   'InvoiceDiscountAmount':null,
+   'InvoiceDiscountPercentage':null,
+   'InvoiceTax':0.1800,
+   'Notes':null,
+   'PaymentDetails':null,
+   'Reference':null,
+   'TemplateId':'3edc5b6f-37aa-4516-8c1e-3cf268bf51e6',
+   'InvoiceDate':'2016-03-07T00:00:00',
+   'SendDate':null,
+   'DueDate':null,
+   'Address':null,
+   'TaxSummaryText':null,
+   'LineItems':[  
+      {  
+         'ParentInvoiceLineItemId':null,
+         'BillableId':null,
+         'DiscountAmountExTax':null,
+         'DiscountAmountTax':null,
+         'DiscountPercent':null,
+         'Amount':2.00,
+         'InvoiceDiscountedAmountExTax':1.8200,
+         'InvoiceDiscountedTaxAmount':0.1800,
+         'HasDataForPosting':true,
+         'IsSubTotal':false,
+         'IsParent':false,
+         'IsHidden':false,
+         'AccountId':'00000000-0000-0000-0000-000000000000',
+         'PrintGroupAsSingleLine':false,
+         'ChargeableItemId':'8cd53f00-f6b9-4d6c-891d-83cc6a348e40',
+         'LineNo':1,
+         'Description':'SD',
+         'Quantity':null,
+         'UnitPriceExTax':1.8181818182,
+         'UnitPriceTax':0.1818181818,
+         'UnitPriceIsTaxInclusive':false,
+         'TaxGroupId':'e6015088-28f5-4bfe-8085-ff9fc2564efa',
+         'TaxIsModified':false,
+         'TaxAmount':0.1800,
+         'AmountExTax':1.8182
+      }
+]}
+
+
+
+#Group Terms
+
+Resources related to Terms in the Reckon One API
+
+## Terms Collection [/terms]
+
+- ID (GUID) - The unique ID of the term
+- Name (String) - The name of the term
+- Description (String) - The description of the term
+- Type (Number) - The type of the term (0 - days after issue, 1 - day of current month, 2 - day of next month)
+
+
+### Retrieve the list of terms [GET]
+
++ Response 200 (application/json)
+
+{  
+   "Id":"95bd04d7-4acc-4cde-bf5b-b14757224316",
+   "Name":"Net 15",
+   "Description":"Net due 15 days from issue.",
+   "Type":0
+}
+
+#Group Projects
+
+Resources related to Projects in the Reckon One API
+
+## Projects Collection [/projects]
+
+- ID (GUID) - The GUID of the project
+- Name (String) - The name of the project
+- Status (Number) - The status of the project (0 - Active, 1 - InActive, 2 - Cancelled, 3 - Completed)
+- StartDate (Date/Time) - The start date of the project
+- EndDate (Date/Time) - The end date of the project
+- ProjectItems (Array) - Array of all items included in the project
+- Contacts (Array) - Array of all contacts included in the project
+- ParentID (GUID) - The GUID of the parent project if this is a subproject
+
+### Retrieve all projects [GET]
+
++ Response 200 (application/json)
+
+{  
+   "ID":"2402abce-e210-4435-a32c-735e2d642874",
+   "Name":"H Project",
+   "Status":0
+}
+
+### Post a single project [POST]
+
++ Request 200 (application/json)
+
+{  
+   'Name':’Building_2015’,
+   'StartDate':01.01   .2015,
+   'EndDate':02.01   .2015,
+   'Status':0,
+   'Description':'Shopping Centre',
+   'ProjectItems':[  
+
+   ],
+   'Contacts':[  
+
+   ],
+   'ParentId':'e52687e1-d598-4a32-b9ba-0f0370f5e94e'
+}
+
+#Group Timesheets
+
+Resources related to Timesheets in the Reckon One API
+
+## Timesheets Collection [/timesheets]
+
+- TimesheetEntryID (GUID) - The entry id of the timesheet as a GUID
+- Date (Date/Time) - The date of the timesheet
+- ProjectID (GUID) - The GUID of the project assigned to the timesheet entry
+- CustomerID (GUID) - The GUID of the contact assigned to the timesheet entry
+- ItemID (GUID) - The GUID of the Item assigned to the timesheet
+- Notes (String) - The notes associated with the timesheet
+- Billable (Boolean) - Whether the timesheet should be considered billable or not
+- Status (Number) - The status of the timesheet (1 - Non Billable, 2 - Unbilled, 3 - Billed)
+- EmployeeID (GUID) - The GUID of the employee assigned to the timesheet
+- CashBookID (GUID) - The GUID of the cashbook the timesheet is associated with
+- EntryNo (String) - The entry number of the timesheet
+- ProjectName (String) - The name of the project the timesheet is linked to
+- CustomerName (String) - The name of the customer the timesheet is linked to
+- ItemName (String) - The name of the item the timesheet is linked to
+- EmployeeName (String) - The name of the employee the timesheet is linked to
+- Time (Number) - The time in hours the timesheet is for
+
+### Retrieve a list of employees with timesheets [GET /timesheets/employee]
+
++ Response 200 (application/json)
+
+
+[  
+   {  
+      "ID":"1da837c2-c03a-446d-b5c2-c0577950b644",
+      "Name":"Steve Test"
+   },
+   {  
+      "ID":"465928e8-431d-4584-8d06-69fec982eb3c",
+      "Name":"Don Drake"
+   },
+   {  
+      "ID":"67e2c845-e684-4980-a5f9-33e5f7778e14",
+      "Name":"Susan Data"
+   },
+   {  
+      "ID":"fcc870ca-1377-4d64-b453-65387418686f",
+      "Name":"Jim Smith"
+   }
+]
+
+### Retrieve a timesheet by id [GET /timesheets/entry/{timesheetEntryId}]
+
++ Parameters
+  + timesheetentryid - The unique GUID of the entry to retrieve
+
++ Response 200
+
+{  
+   "TimesheetEntryId":"1cecf664-33b1-481e-a353-365113b76020",
+   "Date":"2016-05-16T00:00:00+00:00",
+   "ProjectId":"2f182003-6031-4c8d-bf52-082cd948ac97",
+   "CustomerId":"fec28ebc-f916-4544-8257-017649d45211",
+   "ItemId":"142d973c-8771-45cc-8d61-47a57d517b80",
+   "Notes":"Gardening",
+   "Billable":true,
+   "Status":2,
+   "EmployeeId":"1da837c2-c03a-446d-b5c2-c0577950b644",
+   "CashbookId":"0da93f9e-acb7-4bb0-b66d-a124e02dbe39",
+   "EntryNo":26316,
+   "ProjectName":"Aportis",
+   "CustomerName":"Aportis",
+   "ItemName":"Consulting",
+   "EmployeeName":"Shaun Locke",
+   "Time":"01:00"
+}
+
+
+### Retrieve a summary of timesheets [GET /timesheets/summary/]
+
+ + Response 200 (application/json)
+
+ 
+{  
+   "EntryId":"1cecf664-33b1-481e-a353-365113b76020",
+   "Date":"2016-05-16T00:00:00+00:00",
+   "EmployeeId":"1da837c2-c03a-446d-b5c2-c0577950b644",
+   "CustomerName":"Aportis",
+   "ChargeableItemName":"Consulting",
+   "ProjectName":"Aportis",
+   "Note":"Gardening",
+   "Length":60,
+   "Status":2,
+   "Billable":true
+}
+
+### Post a single timesheet (Day) [POST]
+
++ Request 200 (application/json)
+
+
+{  
+   'EmployeeId':'f9b50bea-5f92-46a0-be02-2ba541f1860e',
+   'Date':'2016-04-30',
+   'Entries':{  
+      [  
+         {  
+            'TimesheetEntryId':'00000000-0000-0000-0000-000000000000',
+            'Date':'2016-04-30T00:00:00',
+            'ProjectId':'6f05c231-40f7-4e33-a065-d2e4e872ba00',
+            'CustomerId':'3de468aa-becf-47e0-a769-d4300b74d93f',
+            'ItemId':'3938d51f-e885-4e21-abb3-04cce93f1d3d',
+            'Notes':'peter test api',
+            'Time':'01:01',
+            'Billable':false,
+            'Status':1,
+            'EmployeeId':'f9b50bea-5f92-46a0-be02-2ba541f1860e',
+            'CashbookId':'35ab8405-cf6f-4dc4-b703-1ccf40c5c234',
+            'EntryNo':0,
+            'ProjectName':'Proj 1',
+            'CustomerName':'Cust 1',
+            'ItemName':'ItemSB1',
+            'EmployeeName':'William Tang'
+         }
+
+
+
+### Post a single timesheet (Weekly) [POST]
+
++ Request 200 (application/json)
+
+{  
+   'EmployeeId':'91b66246-7ca1-410c-b44f-16c77ee8c9e1',
+   'StartDate':'2016-04-25',
+   'Timesheets':[  
+      {  
+         'ProjectId':'6f05c231-40f7-4e33-a065-d2e4e872ba00',
+         'CustomerId':'3de468aa-becf-47e0-a769-d4300b74d93f',
+         'ItemId':'3938d51f-e885-4e21-abb3-04cce93f1d3d',
+         'Billable':false,
+         'Day1':'01:00',
+         'Day2':'02:00',
+         'Day3':'03:00',
+         'Day4':'04:00',
+         'Day5':'05:00',
+         'Day6':null,
+         'Day7':null
+      }
+   ]
+}
+
+
+#Group Expenses
+
+Resources related to Expenses in the Reckon One API
+
+### Expenses Collection [/expenses]
+
+- EmployeeID (GUID) - The GUID of the employee the expense is associated with
+- CustomerID (GUID) - The GUID of the customer the expenses is associated with
+- Status (Number) - The status of the expense claim (1 - Draft, 2 - Approved, 3 - Paid)
+- ClaimNumber (String) - The number to be associated with the expense claim
+- ReferenceCode (String) - Any reference associated with the expense claim
+- ProjectID (GUID) - Any project associated with the expense claim
+- ClaimDate (Date/Time) - The date of the expense claim
+- TemplaetID (GUID) - The GUID of the template associated with the expense claim
+- AccountsPayableCategoryID - The ID of the accounts payable account to associate with the expense claim
+- ExpenseClaimAmount - The amount of the expense claim
+- ExpenseClaimTax - The tax amount of the expense claim
+- AmountTaxStatus - The tax status of the expense claim
+- ExpenseClaimItemsArray - Array of the items to be included in the expense claim
+- Date (Date/Time) - The date to be associated with the expense claim line
+- SupplierID (GUID) - The GUID of the supplier to be associated with the expense claim line
+- CustomerID (GUID) - The GUID of the customer to be associated with the expense claim line
+- Notes (String) - The notes to be associated with the expense claim line
+- IsBIllable (boolean) - Whether the line on the expense claim should be considered billable
+- Status (Number) - The status of the expense claim line (2 - Unbillable, 3 - Billable)
+- DiscountAmountExTax (Number) - Any discount to be applied to the line without tax
+- DiscountAmountTax (Number) - Any discount to be applied to the lines tax amount
+- DiscountAccuracy (Number) - How many decimal places are set with the line. Up to 8. Default 2.
+- DiscountPercent (Number) - Any percentage discount to apply to the line
+- Amount (Number) - The amount of the line
+- AmountAccuracy (Number) - How many decimal points are associated with the total transaction. Default 2. Up to 8.
+- InvoiceDiscountedAmountExTax (Number) - The amount of the line including discounts minus tax
+- InvoiceDiscountedTaxAmount (Number) - The tax amount of the line including any discounts
+- IsSubTotal (Boolean) - Whether the line is a subtotal line
+- IsParent (Boolean) - Whether the line is a parent of other sub lines or not
+- IsHidden (Boolean) - Whether the line should appear on the transaction or not
+- HasDataForPosting (Boolean) - ALWAYS TRUE
+- AccountID (GUID) - The id of any account to be associated with the line
+- PrintGroupAsSingleItem (Boolean) - Whether a group of line items should be printed as a single line
+- ChargeableItemID (GUID) - If the line should be linked with a item, the GUID of that item
+- LineNo (Number) - The line number on the expenses claim
+- Description (String) - The description for the line
+- Quantity (Number) - The quantity for the line
+- ProjectID (GUID) - The GUID of the project for the line
+- UnitPriceExTax (Number) - The amount of the unit price without tax
+- UnitPriceTax (Number) - The amount of the unit price tax amount
+- UnitPricePrecision (Number) - How many decimal places the line has up to 8. Default 2.
+- UnitPriceIsTaxInclusive (Boolean) - Whether the unit price includes tax or not
+- TaxGroupID (GUID) - The GUID of the tax item to be associated with the line item
+- TaxIsModified (Boolean) - If its false, your tax calculations will be compared against the Reckon One tax engine and if it does not match the transaction is blocked. If set to true, the engine is not checked and you can post any tax you desire. The UI also controls this function via SETTINGS for the same purpose.
+- TaxAmount (Number) - The amount of tax for the line
+- AmountExTax (Number) - The amount for the line without tax
+
+### Retrieve a list of Expense Claims [GET]
+
++ Response 200 (application/json)
+
+{  
+   "CashbookID":"e17417ac-fc79-4d4d-9ee8-1780b3bc326f",
+   "Id":"0e9a8bac-dd82-4efb-be17-446e81a3ddf3",
+   "ClaimAmount":89.7000,
+   "ClaimDate":"2016-08-17T00:00:00+00:00",
+   "ClaimNumber":"EXP0097",
+   "ClaimOrder":40,
+   "CustomerID":null,
+   "CustomerName":null,
+   "EmployeeContactID":"7a900a85-fac7-4f05-bbb4-a16edd8894c0",
+   "EmployeeName":"Steve Jobs",
+   "Balance":0.0000,
+   "IsSubProject":false,
+   "ProjectID":null,
+   "ProjectName":null,
+   "ProjectPath":null,
+   "Status":1,
+   "Unbilled":0E-10,
+   "UserID":null
+}
+
+### Retrieve a single Expense Claim by ID [GET /expenseclaims/{expenseid}]
+
++ Parameters
+  + expenseid - The GUID of the expense claim to be retrieved
+
++ Response 200 (application/json)
+
+{  
+   "AccountsPayableAccountingCategoryID":"c806a197-4fb0-400e-8f93-513a2386bcf6",
+   "Allocations":[  
+
+   ],
+   "AmountTaxStatus":3,
+   "CashbookId":"e17417ac-fc79-4d4d-9ee8-1780b3bc326f",
+   "ClaimDate":"2017-01-12T00:00:00",
+   "ClaimNumber":"EXP0119",
+   "CompanyName":"ABC Building",
+   "CustomerId":"00000000-0000-0000-0000-000000000000",
+   "EmployeeContactID":"5a2b0d5c-daf8-4b22-b8bd-c333a453e751",
+   "ExpenseClaimAmount":5020.0000,
+   "ExpenseClaimItems":[  
+      {  
+         "CustomerID":"0790a34c-1315-40da-a3c9-6e0d1c78e96b",
+         "Date":"2017-01-12T00:00:00",
+         "ExpenseClaimID":"d81c6f79-8794-4f4b-bf92-f2c2cb07c38d",
+         "ExpenseClaimLineItemID":"4b691f42-d7a9-468e-b7dd-9a61a3627464",
+         "IsBillable":true,
+         "Notes":null,
+         "Status":3,
+         "SupplierID":"00000000-0000-0000-0000-000000000000",
+         "DiscountAmountExTax":null,
+         "DiscountAmountTax":null,
+         "DiscountAccuracy":null,
+         "DiscountPercent":null,
+         "Amount":5020.00,
+         "AmountAccuracy":null,
+         "InvoiceDiscountedAmountExTax":5020.00,
+         "InvoiceDiscountedTaxAmount":0.0000,
+         "HasDataForPosting":true,
+         "IsSubTotal":false,
+         "IsParent":false,
+         "IsHidden":false,
+         "AccountId":"11c92368-9cb4-4024-9f78-92aaf6abe940",
+         "PrintGroupAsSingleLine":false,
+         "Id":"00000000-0000-0000-0000-000000000000",
+         "ChargeableItemId":"00000000-0000-0000-0000-000000000000",
+         "LineNo":1,
+         "Description":"Bank Fee description",
+         "Quantity":null,
+         "ProjectId":"00000000-0000-0000-0000-000000000000",
+         "UnitPriceExTax":0.0,
+         "UnitPriceTax":0.0,
+         "UnitPricePrecision":2.0,
+         "UnitPriceIsTaxInclusive":false,
+         "TaxGroupId":"cf46f8f0-d301-4ba1-8d52-aeffb506b571",
+         "TaxIsModified":false,
+         "TaxAmount":0.0000,
+         "AmountExTax":5020.0000
+      }
+   ],
+   "ExpenseClaimTax":0.0000,
+   "Id":"d81c6f79-8794-4f4b-bf92-f2c2cb07c38d",
+   "LegalName":"ABC Building Pty Ltd",
+   "Notes":null,
+   "ProjectID":"00000000-0000-0000-0000-000000000000",
+   "ReferenceCode":null,
+   "Status":2,
+   "TemplateId":"d4ef2f8d-78a9-47c3-99b9-3942d99f82ee"
+}
+
+
+### Post a single Expense Claim [POST]
+
++ Request 200 (application/json)
+
+{
+  "EmployeeContactId": "86a9a1b7-e28c-4997-b849-d4402144c1a2",
+  "CustomerId": "af0b1e11-c327-40f5-af65-27c155367305",
+  "Status": 1,
+  "ClaimNumber": null,
+  "ReferenceCode": null,
+  "ProjectId": "e3dbab49-50f2-4c12-8a30-d30227165d04",
+  "ClaimDate": "2016-09-07T00:00:00",
+  "TemplateId": "64d80480-11b2-4e87-a9af-0f8bd5e0c24e",
+  "AccountsPayableAccountingCategoryId": "66bafa47-a83d-4b87-8bc5-106b81733e6f",
+  "ExpenseClaimAmount": 41.0,
+  "ExpenseClaimTax": 1.0,
+  "AmountTaxStatus": 2,
+  "ExpenseClaimItems": [
+    {
+      "Date": "2016-09-07T00:00:00",
+      "SupplierID": "e38db1f9-cbe6-4b4a-a1b6-fc4c7f1ac41c",
+      "CustomerID": "af0b1e11-c327-40f5-af65-27c155367305",
+      "Notes": "qqqqqqqqqqq",
+      "IsBillable": false,
+      "Status": 1,
+      "DiscountAmountExTax": null,
+      "DiscountAmountTax": null,
+      "DiscountAccuracy": null,
+      "DiscountPercent": null,
+      "Amount": 11.0,
+      "AmountAccuracy": null,
+      "InvoiceDiscountedAmountExTax": 10.0,
+      "InvoiceDiscountedTaxAmount": 1.0,
+      "HasDataForPosting": true,
+      "IsSubTotal": false,
+      "IsParent": false,
+      "IsHidden": false,
+      "AccountId": "bbf4c47e-afdc-4632-b9d2-07912889eb4a",
+      "PrintGroupAsSingleLine": false,
+      "ChargeableItemId": null,
+      "LineNo": 1,
+      "Description": "qqqqq",
+      "Quantity": null,
+      "ProjectId": "e3dbab49-50f2-4c12-8a30-d30227165d04",
+      "UnitPriceExTax": 0.0,
+      "UnitPriceTax": 0.0,
+      "UnitPricePrecision": 0.0,
+      "UnitPriceIsTaxInclusive": false,
+      "TaxGroupId": "a23b1b14-40e1-4cd2-a60a-0d6fa995c1e1",
+      "TaxIsModified": false,
+      "TaxAmount": 1.0,
+      "AmountExTax": 10.0
+    },
+    {
+      "Date": "2016-09-07T00:00:00",
+      "SupplierID": "2ba2f113-e2bd-40df-b6ca-dce68f5f8640",
+      "CustomerID": "af0b1e11-c327-40f5-af65-27c155367305",
+      "Notes": "xxxxx",
+      "IsBillable": false,
+      "Status": 1,
+      "DiscountAmountExTax": null,
+      "DiscountAmountTax": null,
+      "DiscountAccuracy": null,
+      "DiscountPercent": null,
+      "Amount": 30.0,
+      "AmountAccuracy": null,
+      "InvoiceDiscountedAmountExTax": 30.0,
+      "InvoiceDiscountedTaxAmount": null,
+      "HasDataForPosting": true,
+      "IsSubTotal": false,
+      "IsParent": false,
+      "IsHidden": false,
+      "AccountId": null,
+      "PrintGroupAsSingleLine": false,
+      "ChargeableItemId": "5ff29403-205e-40e0-adab-202dec0bd6c4",
+      "LineNo": 2,
+      "Description": "cbcvbcvb",
+      "Quantity": 1.0,
+      "ProjectId": "e3dbab49-50f2-4c12-8a30-d30227165d04",
+      "UnitPriceExTax": 30.0,
+      "UnitPriceTax": 0.0,
+      "UnitPricePrecision": 0.0,
+      "UnitPriceIsTaxInclusive": false,
+      "TaxGroupId": null,
+      "TaxIsModified": false,
+      "TaxAmount": null,
+      "AmountExTax": 30.0
+    }
+  ],
+  "Notes": null
+}
+
+
+#Group Reports
+
+Resources related to reports in Reckon One
+
+## Reports Collection 
+
+## Trial Balance Collection [/trialbalance/false]
+
+- Income Array (Array) - This array contains all the transactions which are related to income. Eacha ccount is a entry as part of this array
+- ID (GUID) - The ID of the account
+- Name (String) - The name of the account
+- Code (String) - The export code for the account
+- Type (GUID) - The type of the account
+- TaxCode (GUID) - The tax code linked to the account
+- ParentID (GUID) - If the accuont is a subaccount, the GUID of the parent account
+- Debit (Number) - The amount of debits on the account in the period specified
+- Credit (Number) - The amount of credits on the account in the period specified
+- OtherIncomeArray (Array) - This array contains all the transactions which are related to Other Income. Each account is a entry as part of this array. Note - The data fields related to these transactions ar ethe same as the Income Array type. Please reference those for further information (eg name, ID, Code, Type etc)
+- COGS Array (Array) - This array contains all the transactions which are related to Other Income. Each account is a entry as part of this array. Note - The data fields related to these transactions are the same as the Income Array type. Please reference those for further information (eg name, ID, Code, Type etc)
+- Expenses Array - This array contains all the transactions which are related to Other Income. Each account is a entry as part of this array. Note - The data fields related to these transactions ar ethe same as the Income Array type. Please reference those for further information (eg name, ID, Code, Type etc)
+- Other Expenses Array (Array) - This array contains all the transactions which are related to Other Income. Each account is a entry as part of this array. Note - The data fields related to these transactions ar ethe same as the Income Array type. Please reference those for further information (eg name, ID, Code, Type etc)
+- CurrentAssets_Bank Array (Array) - This array contains all the transactions which are related to Other Income. Each account is a entry as part of this array. Note - The data fields related to these transactions ar ethe same as the Income Array type. Please reference those for further information (eg name, ID, Code, Type etc)
+- CurrentAssets_AccountsReceiveable Array (Array) - This array contains all the transactions which are related to Other Income. Each account is a entry as part of this array. Note - The data fields related to these transactions ar ethe same as the Income Array type. Please reference those for further information (eg name, ID, Code, Type etc)
+- CurretAssets_Other Array (Array) - This array contains all the transactions which are related to Other Income. Each account is a entry as part of this array. Note - The data fields related to these transactions ar ethe same as the Income Array type. Please reference those for further information (eg name, ID, Code, Type etc)
+- NonCurrentAssets_Fixed Array (Array) - This array contains all the transactions which are related to Other Income. Each account is a entry as part of this array. Note - The data fields related to these transactions ar ethe same as the Income Array type. Please reference those for further information (eg name, ID, Code, Type etc)
+- NonCurrentAssets_Other Array (Array) - This array contains all the transactions which are related to Other Income. Each account is a entry as part of this array. Note - The data fields related to these transactions ar ethe same as the Income Array type. Please reference those for further information (eg name, ID, Code, Type etc)
+- CurrentLiabilities_CreditCard Array (Array) - This array contains all the transactions which are related to Other Income. Each account is a entry as part of this array. Note - The data fields related to these transactions ar ethe same as the Income Array type. Please reference those for further information (eg name, ID, Code, Type etc)
+- CurrentLiabilities_AccountsPayable Array (Array) - This array contains all the transactions which are related to Other Income. Each account is a entry as part of this array. Note - The data fields related to these transactions ar ethe same as the Income Array type. Please reference those for further information (eg name, ID, Code, Type etc)
+- CurrentLiabilities_Other Array (Array) - This array contains all the transactions which are related to Other Income. Each account is a entry as part of this array. Note - The data fields related to these transactions ar ethe same as the Income Array type. Please reference those for further information (eg name, ID, Code, Type etc)
+- NonCurrentLiabilities Array (Array) - This array contains all the transactions which are related to Other Income. Each account is a entry as part of this array. Note - The data fields related to these transactions ar ethe same as the Income Array type. Please reference those for further information (eg name, ID, Code, Type etc)
+- Equity Array (Array) - This array contains all the transactions which are related to Other Income. Each account is a entry as part of this array. Note - The data fields related to these transactions ar ethe same as the Income Array type. Please reference those for further information (eg name, ID, Code, Type etc)
+- BookName (String) - The name of the book this report was generated from
+- DateGenerated (Date/Time) - The date the report was generated by the API
+- ReportName (String) - The name of the report
+
+
+### Retrieve the trial balance report [POST]
+
++ Request 200
+
+{  
+   'Orientation':'Portrait',
+   'ReportingBasis':'AccrualsBasis',
+   'PeriodFilter':{  
+      'PeriodType':'ThisMonth'
+   }
+}
+
+## Balance Sheet Collection [/balancesheet/false]
+
+Valid Period Types:
+
+{ThisMonth, ThisQuarter, ThisYear, ThisYearToDate, ThisMonthLastYear, ThisQuarterLastYear, LastMonth, LastQuarter, LastYear, LastYearToDate, Last3Months, Last6Months, Last12Months, AsAtToday, AsAtDate, This2MonthPeriod, This6MonthPeriod, Last2MonthPeriod, Last6MonthPeriod, AsAtEndOfThisFinancialYear, AsAtEndOfLastFinancialYear, AllDates, Custom}
+
+Example with custom date range:
+
+{'Orientation':'Landscape','ReportingBasis':'AccrualsBasis','PeriodFilter':{'PeriodType':'Custom','StartDay':'2015-12-31','EndDay':'2016-04-1'}}
+
+- Type (String) - The type of data that is in the next array
+- Accounts Array (Array) - Contains all the accounts which is allocated to a particular area of the report such as the current assets.
+- Name (String) - The name of the account
+- Code (String) - The account code for the account
+- ExportCode (String) - The export code for the account
+- Period1Amount (Number) - The amount allocated to the account in the set period
+- Period2Amount (Number) - If a comparison period has been included, the amount allocated to the account in the comparison period
+- Period2Total (Number) - If a comparison period has been included, the total amount allocated to the account in the comparison period
+- BookName (String) - The name of the book the report data is from
+- DateGenerated (Date/Time) - The time the report was generated
+- ReportName (String) - The name of the report
+
+
+### Retrieve a balance sheet report [POST]
+
+
++ Request 200 (application/json)
+
+{  
+   'Orientation':'Portrait',
+   'ReportingBasis':'AccrualsBasis',
+   'PeriodFilter':{  
+      'PeriodType':'ThisMonth'
+   }
+}
+
+
+#Group Receipts
+
+## Receipts Collection [/receipts]
+
+- TransDate (Date/Time) - The transaction date of the receipt
+- BankAccountID (GUID) - The GUID of the bank account associated with the receipt
+- Amount (Number) - The total amount of the receipt
+- ContactID (GUID) - The GUID of the contact associated with the receipt
+- AllocateFullAmount (Boolean) - Whether the full amount is to be allocated to another transaction
+- PaymentMethodID (GUID) - The GUID of the payment method used with the receipt
+- Details (String) - The details entered against the receipt
+- Reference (String) - The reference entered against the receipt
+- Narration (String) - The narration for the receipt
+- Allocations Array (Array) - Whether the transaction should be allocated if it is to be associated with a transaction
+- AllocationSplit Array (Array) - If the transaction is not to be associated with a previous transaction how the amount should be allocated in the book
+- ProjectID (GUID) - The GUID of the project assigned to the receipt
+- ChargeableItemId (GUID)  - The GUID of the item assigned to the receipt
+- LineNo (Number) - The line number in the transaction. Each line requires a seperate entry in the AllocationSplit array
+- Description (String) - The description for the receipt
+- Quantity (Number) - The quantity for the line on the receipt
+- UnitPriceExTax (Number) - The unit price to be allocated to the line without tax included
+- UnitPriceTax (Number) - The tax amount to be allocated to the line
+- UnitPricePrecision (Number) - The number of decimal places the tax should be calculated up to 8. Default 2.
+- DiscountAmountExTax (Number) - The amount of the line with a discount applied minus tax
+- DiscountAmountTax (Number) - The amount of tax for the line with a discount applied
+- DiscountPercent (Number) - If a discount is to be applied via percentage, the percentage the discount should be
+- TaxGroupID (GUID) - The GUID of the tax group to assign to the line
+- TaxIsModified (Boolean) - If its false, your tax calculations will be compared against the Reckon One tax engine and if it does not match the transaction is blocked. If set to true, the engine is not checked and you can post any tax you desire. The UI also controls this function via SETTINGS for the same purpose.
+- AmountExTax (Number) - The amount of the line minus tax
+- TaxAmount (Number) - The tax amount for the line
+- AmountAccuracy (Number) - How many decimal points are associated with the amount for the total transaction up to 8. 2 by default.
+- InvoiceDiscountedAmountEx Tax - Always null
+- InvoiceDiscountedTaxAmount - Always null
+- HasDataForPosting (Boolean) - ALWAYS TRUE
+- IsSubtotal (Boolean) - Whether the line is a subtotal line or not
+- IsParent (Boolean) - Whether the line is the parent of a group of other lines
+
+
+### Retrieve a list of receipts [GET]
+
++ Response 200 (application/json)
+
+
+
+{  
+   "Id":"0013ade2-80df-4fed-bac2-7fc1c43790d0",
+   "CashbookId":"e17417ac-fc79-4d4d-9ee8-1780b3bc326f",
+   "BankAccountId":"00feb5c9-6da3-4603-87d8-d1ee7d6de894",
+   "Amount":11.0000,
+   "ContactName":"Desc_AE94D6FA-2BD82002-49BF-874F-48720B990E87",
+   "Details":"abc",
+   "PaymentMethodType":1,
+   "PaymentMethodName":"Cash",
+   "IsReconciled":true,
+   "Reference":"def",
+   "TransDate":"2016-08-25T00:00:00+00:00"
+}
+
+### Retrieve a single receipt by id [GET /receipts/{receiptid}]
+
++ Parameters 
+  + receiptid - The GUID of the transaction to be retrieved
+
++ Response 200 (application/json)
+
+{  
+   "Id":"0013ade2-80df-4fed-bac2-7fc1c43790d0",
+   "CashbookId":"e17417ac-fc79-4d4d-9ee8-1780b3bc326f",
+   "BankAccountId":"00feb5c9-6da3-4603-87d8-d1ee7d6de894",
+   "Amount":11.0000,
+   "ContactName":"Desc_AE94D6FA-2BD82002-49BF-874F-48720B990E87",
+   "Details":"abc",
+   "PaymentMethodType":1,
+   "PaymentMethodName":"Cash",
+   "IsReconciled":true,
+   "Reference":"def",
+   "TransDate":"2016-08-25T00:00:00+00:00"
+}
+
+
+### Post a single receipt [POST]
+
++ Request 200 (application/json)
+
+
+  {
+      'TransDate': '10/10/2015',
+      'BankAccountId': '5b3a4f48-beb0-4e23-bf2f-2d7127239a00',
+      'Amount': 100,
+      'ContactId': '519403ea-bd33-4b7c-b71a-cd32b8fbe2c8',
+      'AllocateFullAmount': false,
+      'PaymentMethodId': '057ecf9c-b966-4fe5-93e5-edc8812344b3',
+      'Details': 'abc',
+      'Reference': 'def',
+      'IsReconciled': true,
+      'Narration': 'qqq',
+      'Allocations': [ ],
+      'AllocationSplit': [
+        {
+          'ProjectId': '24879c21-8e1f-4f50-b1a0-bb01d3447b7b',
+          'ChargeableItemId': 'af848ea8-cfdb-4768-a6f9-c916a873985f',
+          'LineNo': 1,
+          'Description': null,
+          'Quantity': 0,
+          'UnitPriceExTax': 10,
+          'UnitPriceTax': 1,
+          'UnitPricePrecision': 2,
+          'DiscountAmountExTax': null,
+          'DiscountAmountTax': null,
+          'DiscountAccuracy': null,
+          'DiscountPercent': null,
+          'TaxGroupId': 'fae4ba18-20db-4b35-a944-711f7c3273bb',
+          'TaxIsModified': false,
+          'AmountExTax': 10,
+          'Amount': 0,
+          'TaxAmount': 1,
+          'AmountAccuracy': null,
+          'InvoiceDiscountedAmountExTax': null,
+          'InvoiceDiscountedTaxAmount': null,
+          'HasDataForPosting': true,
+          'IsSubTotal': false,
+          'IsParent': false
+        }
+      ]
+    }
+   
+
+   
